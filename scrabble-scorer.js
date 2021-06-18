@@ -1,7 +1,8 @@
 // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
 
 const input = require("readline-sync");
-
+let userWord='';
+let userPick = 0;
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
   2: ['D', 'G'],
@@ -33,27 +34,74 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+ userWord = input.question(`              Let's play Scrabble! Enter a word: `);
+ return userWord
 };
 
-let simpleScore;
 
-let vowelBonusScore;
+
+const simpleScore = (word) => {
+  word = word.toUpperCase();
+  return word.length
+}
+
+
+const vowelBonusScore = (word) => {
+  word = word.toUpperCase();
+  let score = 0;
+  let vowels = /[aeiou]/gi;
+  for(let i = 0;i < word.length; i++) {
+    word[i].match(vowels) ? score += 3 : score ++
+  }
+  return score 
+}
 
 let scrabbleScore;
 
-const scoringAlgorithms = [];
+const scoringAlgorithms = [
+   a = {
+    num: 0,
+    name: 'Simple Score',
+    description: 'Each letter is worth one point.',
+   scorerFunction: simpleScore 
+  },
+  b = {
+    num: 1,
+    name: 'Bonus Vowels',
+    description: 'Vowels are 3 pts, consonants are 1 pt.',
+    scorerFunction: vowelBonusScore
+  },
+   c = {
+    num: 2,
+    name: 'Scrabble',
+    description: 'The traditional scoring algorithm.',
+    scorerFunction: oldScrabbleScorer
+  } 
+]
+function scorerPrompt() {
+  console.log(`                  Which scoring system would you like?      `)
+  for(let i = 0; i < scoringAlgorithms.length; i++){
+    console.log(`
+    ${i}. ${scoringAlgorithms[i].name} - ${scoringAlgorithms[i].description}`)
+  }
+  userPick = input.question('                                                                                              ...pick a number 0-2: '       );
+  return userPick
+}
 
-function scorerPrompt() {}
+function transform() {
 
-function transform() {};
+};
 
 let newPointStructure;
 
 function runProgram() {
-   initialPrompt();
-   
+  initialPrompt();
+  scorerPrompt();
+  console.log(`Your score for ${userWord} is:
+   ${scoringAlgorithms[userPick].scorerFunction(userWord)}`)
 }
+
+
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
