@@ -60,19 +60,16 @@ let scrabbleScore;
 
 const scoringAlgorithms = [
    a = {
-    num: 0,
     name: 'Simple Score',
     description: 'Each letter is worth one point.',
-   scorerFunction: simpleScore 
+    scorerFunction: simpleScore 
   },
   b = {
-    num: 1,
     name: 'Bonus Vowels',
     description: 'Vowels are 3 pts, consonants are 1 pt.',
     scorerFunction: vowelBonusScore
   },
    c = {
-    num: 2,
     name: 'Scrabble',
     description: 'The traditional scoring algorithm.',
     scorerFunction: oldScrabbleScorer
