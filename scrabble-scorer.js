@@ -57,7 +57,6 @@ const vowelBonusScore = (word) => {
 }
 
 let scrabbleScore = (word) => {
-  word = word.toUpperCase()
   let score = 0;
   	for (let i = 0; i < word.length; i++) {
       Object.keys(newPointStructure).includes(word[i]) ? score+= newPointStructure[word[i]] : null 
