@@ -56,23 +56,31 @@ const vowelBonusScore = (word) => {
   return score 
 }
 
-let scrabbleScore;
+let scrabbleScore = (word) => {
+  word = word.toUpperCase()
+  let score = 0;
+  	for (let i = 0; i < word.length; i++) {
+      Object.keys(newPointStructure).includes(word[i]) ? score+= newPointStructure[word[i]] : null 
+	}
+  return score;
+
+}
 
 const scoringAlgorithms = [
-   a = {
+   one = {
     name: 'Simple Score',
     description: 'Each letter is worth one point.',
     scorerFunction: simpleScore 
   },
-  b = {
+  two = {
     name: 'Bonus Vowels',
     description: 'Vowels are 3 pts, consonants are 1 pt.',
     scorerFunction: vowelBonusScore
   },
-   c = {
+   three = {
     name: 'Scrabble',
     description: 'The traditional scoring algorithm.',
-    scorerFunction: oldScrabbleScorer
+    scorerFunction: scrabbleScore
   } 
 ]
 function scorerPrompt() {
@@ -85,11 +93,33 @@ function scorerPrompt() {
   return userPick
 }
 
-function transform() {
+// function transform(array) {
+//   let newArr = '';
+//   for (const pointValue in array){
+//     newArr += array[pointValue]
+//     }
+//   return newArr
+// };
 
-};
+const transform =  (array) =>  {
 
-let newPointStructure;
+   let newArr = {};
+  
+  for (const key in array){
+    for(let i = 0; i < array[key].length;i++){
+      newArr[array[key][i]] = Number(key)
+
+    }
+   
+
+  }
+
+  return newArr
+  console.log(array[key].length)
+
+}
+
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
   initialPrompt();
@@ -97,7 +127,6 @@ function runProgram() {
   console.log(`Your score for ${userWord} is:
    ${scoringAlgorithms[userPick].scorerFunction(userWord)}`)
 }
-
 
 
 // Don't write any code below this line //
@@ -114,4 +143,6 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
+
+
 
