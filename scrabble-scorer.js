@@ -70,17 +70,17 @@ const scoringAlgorithms = [
    one = {
     name: 'Simple Score',
     description: 'Each letter is worth one point.',
-    scorerFunction: simpleScore 
+    scoringFunction: simpleScore 
   },
   two = {
     name: 'Bonus Vowels',
     description: 'Vowels are 3 pts, consonants are 1 pt.',
-    scorerFunction: vowelBonusScore
+    scoringFunction: vowelBonusScore
   },
    three = {
     name: 'Scrabble',
     description: 'The traditional scoring algorithm.',
-    scorerFunction: scrabbleScore
+    scoringFunction: scrabbleScore
   } 
 ]
 function scorerPrompt() {
@@ -125,7 +125,7 @@ function runProgram() {
   initialPrompt();
   scorerPrompt();
   console.log(`Your score for ${userWord} is:
-   ${scoringAlgorithms[userPick].scorerFunction(userWord)}`)
+   ${scoringAlgorithms[userPick].scoringFunction(userWord)}`)
 }
 
 
