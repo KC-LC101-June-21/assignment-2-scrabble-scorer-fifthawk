@@ -60,7 +60,7 @@ let scrabbleScore = (word) => {
   word = word.toUpperCase()
   let score = 0;
   	for (let i = 0; i < word.length; i++) {
-      Object.keys(newPointStructure).includes(word[i]) ? score+= newPointStructure[word[i]] : null 
+      Object.keys(newPointStructure).includes(word[i]) ? score+= Number(newPointStructure[word[i]]) : null 
 	}
   return score;
 
@@ -107,20 +107,15 @@ const transform =  (array) =>  {
   
   for (const key in array){
     for(let i = 0; i < array[key].length;i++){
-      newArr[array[key][i]] = Number(key)
-
+      newArr[array[key][i]] = key
     }
-   
-
   }
-
   return newArr
-  console.log(array[key].length)
 
 }
 
 let newPointStructure = transform(oldPointStructure);
-
+console.log(newPointStructure)
 function runProgram() {
   initialPrompt();
   scorerPrompt();
