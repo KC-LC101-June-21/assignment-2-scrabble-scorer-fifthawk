@@ -107,7 +107,7 @@ const transform =  (array) =>  {
   
   for (const key in array){
     for(let i = 0; i < array[key].length;i++){
-      newArr[array[key][i]] = Number(key)
+      newArr[(array[key][i]).toLowerCase()] = Number(key)
     }
   }
   return newArr
